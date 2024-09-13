@@ -9,7 +9,7 @@ Penjelasan:
 hydra: Perintah Hydra untuk melakukan brute-force.<br>
 -L user.txt: File yang berisi daftar username.<br>
 -P pass.txt: File yang berisi daftar password.<br>
--t 4: Menentukan jumlah thread (4 thread dalam hal ini).<br>
+**`-t 4`**: Menentukan jumlah thread (4 thread dalam hal ini).<br>
 -V: Mengaktifkan mode verbose untuk menampilkan proses brute-force secara terperinci.<br>
 192.168.1.2: Alamat IP target.<br>
 http-post-form: Menunjukkan metode serangan HTTP POST.<br>
